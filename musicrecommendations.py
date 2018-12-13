@@ -1,23 +1,7 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[2]:
-
-
 import re
-
-
-# In[3]:
-
-
 import tweepy
 from tweepy import OAuthHandler
 from textblob import TextBlob
-
-
-# In[111]:
-
-
 import json
 from pprint import pprint
 from statistics import mean
@@ -60,11 +44,10 @@ def clean_text(text):
     return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", text).split())
 
 def analize_sentiment_pol(text):
-#     analysis = TextBlob(clean_text(text))
     analysis = TextBlob(text)
     return analysis.sentiment.subjectivity
 
-# def music_input()
+# reading json file
 def read_file(filename):
     with open(filename) as f:
         data = json.load(f)
@@ -84,7 +67,6 @@ if __name__ == '__main__':
     finalsong={}
     for i in range(len(jsonData)):
         new_mag=0
-#         print (jsonData[i]['lyrics'],'\n')
         songs[i]=jsonData[i]
 #         print (songs)
         songs[i]['lyrics']=clean_text(songs[i]['lyrics'])
@@ -102,18 +84,3 @@ if __name__ == '__main__':
         sorted_list.append(finalsong[keys])
     for i in range(len(sorted_list)):
         print ('Song:',sorted_list[i]['name'],'--- By:',sorted_list[i]['artist'],'\n')
-#        
-#     get_tweets("realDonaldTrump")
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
