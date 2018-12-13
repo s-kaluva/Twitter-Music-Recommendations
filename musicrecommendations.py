@@ -51,16 +51,11 @@ def analize_sentiment_pol(text):
 def read_file(filename):
     with open(filename) as f:
         data = json.load(f)
-    return data
-
-def music_sent_score(lyric):
-    scoreList=[]
-    
+    return data  
 
 if __name__ == '__main__':
     jsonData = read_file('tracks.json')
     tweet_mean_score = get_tweets("realDonaldTrump")
-#     print (tweet_mean_score)
     songs = {}
     cleanLyrics = ''
     mag=9
@@ -68,17 +63,10 @@ if __name__ == '__main__':
     for i in range(len(jsonData)):
         new_mag=0
         songs[i]=jsonData[i]
-#         print (songs)
         songs[i]['lyrics']=clean_text(songs[i]['lyrics'])
         songs[i]['score']=analize_sentiment_pol(songs[i]['lyrics'])
         new_mag = abs(float(songs[i]['score']) - float(tweet_mean_score))
-#         print (float(new_mag))
-#         if(new_mag < mag):
-#             print ("test")
         finalsong[new_mag]=songs[i]
-#             mag=new_mag
-#     print (songs)
-#     sorted(finalsong)
     sorted_list = list()
     for keys in sorted(finalsong):
         sorted_list.append(finalsong[keys])
